@@ -51,7 +51,6 @@ const Product = () => {
     setCurrentPage(0); // Reset to first page when category changes
   };
 
-
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -60,11 +59,13 @@ const Product = () => {
 
   return (
     <>
-      <div className="bg-slate-200 py-12">
+      <div className="bg-slate-200 py-10">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-semibold text-red-700 pb-4 text-center">
-            Featured Products
-          </h2>
+        <div className="flex justify-center items-center  pb-8">
+       <h2 className=" border-b-2 border-green-400 uppercase text-center text-3xl text-red-700 font-semibold">
+        Featured Products
+        </h2>
+       </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <aside className="bg-white p-4 rounded-lg shadow-md h-full flex flex-col">
               <h2 className="text-xl font-semibold mb-4">Categories</h2>
@@ -110,7 +111,7 @@ const Product = () => {
                           setTitle(a.title);
                           openModal();
                         }}
-                        className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 over:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                       >
                         Get Quote
                       </button>
@@ -142,8 +143,8 @@ const Product = () => {
               nextLinkClassName={"text-white"}
               breakClassName={"bg-white border border-gray-300 rounded "}
               breakLinkClassName={"text-blue-600"}
-              activeClassName={"bg-blue-600 text-white"}
-              activeLinkClassName={"text-white"}
+              activeClassName={"bg-blue-600 "}
+              activeLinkClassName={"text-red-600"}
             />
           </div>
         </div>

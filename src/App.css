@@ -6,7 +6,6 @@
 }
 body {
   font-family: "Poppins", sans-serif;
-
   list-style: none;
 }
 
@@ -48,7 +47,6 @@ body {
   text-align: center;
   background-color: white;
   min-width: 200px;
-
   border-radius: 15px;
   margin: 10px;
   color: black;
@@ -58,20 +56,22 @@ body {
   align-items: center;
   text-wrap: wrap;
 }
-
-.subItem > img {
-  height: 200px;
-  margin-bottom: 2px;
-}
-
 .subItems {
   display: flex;
   margin-top: 50px;
   flex-wrap: wrap;
 }
+.subItem > img {
+  height: 200px;
+  margin-bottom: 2px;
+}
+
+
 
 .textImage {
   padding-top: 20px;
+  font-weight: 700;
+  text-wrap: wrap;
 }
 
 
@@ -82,6 +82,13 @@ body {
   }
   .head {
     font-size: 25px;
+  }
+}
+
+@media(max-width: 576px) {
+  .subItem > img {
+    height: 150px;
+    margin-bottom: 2px;
   }
 }
 

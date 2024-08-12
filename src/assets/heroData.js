@@ -12,9 +12,10 @@ import incuImg from "/nicu.png";
 import dentalSetup from "/dentalSetup.png";
 import laparTower from "/4kLapa.png";
 
+
 export const images = [
   {
-    title: "Suppliers of Choice for Hospitals",
+    title: "Trusted Partners for Advanced Hospital Solutions",
     image: operatingImg,
     subItems: [
       {
@@ -28,37 +29,34 @@ export const images = [
     ],
   },
 
-
   {
-    title: "Committed to Hospital Equipment Quality",
+    title: "Innovative Solutions for Modern Medical Facilities",
     image: laproscopingImg,
     subItems: [
       {
-        title: "4k laparoscopic tower",
+        title: "4k Laparoscopic Tower",
         image: laparTower,
       },
       {
-        title: "Instruments",
+        title: "Precision Instruments",
         image: instrumentsImg,
       },
     ],
   },
 
-
   {
-    title: "Hospital Equipment Experts at Your Service",
+    title: "Specialized Equipment for Neonatal Care",
     image: nicuingImg,
     subItems: [
       {
-        title: "NICU",
+        title: "NICU Equipment",
         image: incuImg,
       },
     ],
   },
 
-
   {
-    title: "Excellence in Hospital Equipment Supply",
+    title: "Leading Providers of Diagnostic Imaging Tools",
     image: xRayingImg,
     subItems: [
       {
@@ -72,9 +70,8 @@ export const images = [
     ],
   },
 
-
   {
-    title: "Your Go-To Hospital Equipment Supplier",
+    title: "Comprehensive Solutions for Dental Practices",
     image: DentalImg,
     subItems: [
       {
@@ -84,3 +81,4 @@ export const images = [
     ],
   },
 ];
+
