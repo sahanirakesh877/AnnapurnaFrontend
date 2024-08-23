@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import TopBar from "./components/TopBar";
 import Gallery from "./pages/Gallery";
+import CheckProduct from "./pages/CheckProduct";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/check" element={<CheckProduct />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />

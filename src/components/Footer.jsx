@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <>
       <div>
-        <div className="bg-gradient-to-r from-green-50 to-green-200 ">
+        <div className="bg-gradient-to-r from-red-200 to-red-400 ">
           <div className="container  px-4 sm:px-6 text-gray-800 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto pt-4">
             <div className="py-5">
               <img
@@ -58,7 +58,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-r from-green-50 to-green-200 pt-2">
+        <div className="bg-gradient-to-r from-red-200 to-red-400  pt-2">
           <div
             className="flex pb-5 px-3 m-auto pt-5 border-t border-red-600 text-gray-800 text-sm flex-col
 max-w-screen-lg items-center"
@@ -109,7 +109,18 @@ max-w-screen-lg items-center"
                 />
               </a>
             </div>
-            <div className="my-5">© Copyright 2020. All Rights Reserved.</div>
+            <div className="my-5">
+              © Copyright 2024. All Rights Reserved. Design With ❤️❤️ By{" "}
+              <span>
+                <a
+                  href="https://technavata.com/"
+                  target="_blank"
+                  className="text-red-700 font-semibold"
+                >
+                  Navata Tech
+                </a>
+              </span>
+            </div>
           </div>
         </div>
       </div>

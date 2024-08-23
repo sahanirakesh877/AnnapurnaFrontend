@@ -57,7 +57,7 @@ const Header = () => {
             <li>
               <Link
                 to="/"
-                className="block py-2 px-4 text-white bg-red-700 rounded md:bg-transparent md:text-red-700 md:p-0 dark:text-red md:dark:text-red-500"
+                className="block py-2 px-4 text-white text-[var(--bg)] rounded md:bg-transparent md:text-[var(--bg)]  md:p-0 dark:text-red md:dark:text-[var(--bg)] "
                 aria-current="page"
                 onClick={closeMenu} // Close menu when clicked
               >

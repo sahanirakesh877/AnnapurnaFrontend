@@ -11,9 +11,11 @@ const Gallery = () => {
   return (
     <>
       <div className="container mx-auto py-10">
-        <h2 className="text-3xl font-semibold text-red-700 pb-4 text-center">
-          Gallery 
+      <div className="flex justify-center items-center  pb-8">
+       <h2 className=" border-b-2 border-green-400 uppercase text-center text-3xl text-red-700 font-semibold">
+       Gallery
         </h2>
+       </div>
         <div className="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>div:not(:first-child)]:mt-8 px-4">
           {imgPhoto.map((photo) => (
             <div key={photo.id} className="relative group">
