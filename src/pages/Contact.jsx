@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const Contact = () => {
@@ -12,8 +12,6 @@ const Contact = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-
-  
     try {
       await axios.post("https://your-api-endpoint.com/submit", {
         name,
@@ -21,13 +19,12 @@ const Contact = () => {
         message,
       });
 
-       // Clear the form fields
-    setName("");
-    setEmail("");
-    setMessage("");
+      // Clear the form fields
+      setName("");
+      setEmail("");
+      setMessage("");
 
-    toast.success("Form submitted successfully!");
-
+      toast.success("Form submitted successfully!");
     } catch (error) {
       toast.error("Failed to submit form.");
       console.error("Error:", error);
@@ -50,7 +47,7 @@ const Contact = () => {
           className="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672.945750644447!2d-122.42107853750231!3d37.7730507907087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858070cc2fbd55%3A0xa71491d736f62d5c!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1619524992238!5m2!1sen!2sus"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220.8311871688979!2d85.30218467116359!3d27.677152350015533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1953a404a995%3A0x774d0c5b4b9bd006!2sKTM%20Showroom%20Lalitpur!5e0!3m2!1sen!2snp!4v1724742764979!5m2!1sen!2snp"
             width="100%"
             height={480}
             style={{ border: 0 }}
@@ -80,7 +77,6 @@ const Contact = () => {
                     </label>
                   </div>
 
-                  
                   <div className="relative mb-6" data-te-input-wrapper-init>
                     <input
                       type="email"

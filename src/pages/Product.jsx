@@ -9,7 +9,7 @@ const Product = () => {
   const [title, setTitle] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const productsPerPage = 8;
+  const productsPerPage = 4;
 
   // Extract unique categories
   const categories = [
@@ -67,7 +67,7 @@ const Product = () => {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <aside className="bg-white p-4 rounded-lg shadow-md h-full flex flex-col">
+            <aside className="bg-white p-4 rounded-lg shadow-md h-full flex flex-col h-fit">
               <h2 className="text-xl font-semibold mb-4">Categories</h2>
               <ul className="space-y-2">
                 {categories.map((category, index) => (
@@ -87,38 +87,42 @@ const Product = () => {
               </ul>
             </aside>
 
-            <section className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {currentProducts.map((a) => (
-                <div
-                  className="bg-white p-4 rounded-lg shadow-md h-72 flex flex-col"
-                  key={a.id}
-                >
-                  <img
-                    src={a.image1}
-                    alt="Product Image"
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                  <div className="p-1">
-                    <h3 className="text-lg font-bold mb-2">{a.title}</h3>
-                    <div className="flex space-x-2">
-                      <Link to={`/product/${a.id}`}>
-                        <button className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                          View Details
+            <section className="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[650px]">
+              {!currentProducts ? (
+                <div>No Products</div>
+              ) : (
+                currentProducts.map((a) => (
+                  <div
+                    className="bg-white p-4 rounded-lg shadow-md h-72 flex flex-col"
+                    key={a.id}
+                  >
+                    <img
+                      src={a.image1}
+                      alt="Product Image"
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                    <div className="p-1">
+                      <h3 className="text-lg font-bold mb-2">{a.title}</h3>
+                      <div className="flex space-x-2">
+                        <Link to={`/product/${a.id}`}>
+                          <button className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            View Details
+                          </button>
+                        </Link>
+                        <button
+                          onClick={() => {
+                            setTitle(a.title);
+                            openModal();
+                          }}
+                          className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        >
+                          Get Quote
                         </button>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          setTitle(a.title);
-                          openModal();
-                        }}
-                        className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      >
-                        Get Quote
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </section>
           </div>
 

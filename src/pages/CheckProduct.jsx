@@ -12,7 +12,10 @@ const Product = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const productsPerPage = 8;
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const productsPerPage = 4;
 
   useEffect(() => {
     // Fetch categories and products
@@ -20,14 +23,14 @@ const Product = () => {
       try {
         // Fetch categories
         const categoryResponse = await axios.get(
-          "http://localhost:5000/api/v1/category"
+          `${import.meta.env.VITE_SERVER}/api/v1/category`
         );
         const categoryData = categoryResponse.data.categories;
         console.log("categoryData", categoryData);
 
         // Fetch products
         const productResponse = await axios.get(
-          "http://localhost:5000/api/v1/products"
+          `${import.meta.env.VITE_SERVER}/api/v1/products`
         );
         const productData = productResponse.data.products;
 
@@ -70,8 +73,31 @@ const Product = () => {
     setCurrentPage(event.selected);
   };
 
+  // const handleCategoryClick = (category) => {
+  //   console.log("handeling category click");
+  //   async function fetchFromCategory() {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:5000/api/v1/products",
+  //         {
+  //           params: {
+  //             categoryId: category ? category._id : "",
+  //           },
+  //         }
+  //       );
+  //       setProducts(response.data.products);
+  //       setSelectedCategory(category ? category.title : "All");
+  //       console.log(category ? category.title : "All", selectedCategory);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchFromCategory();
+  // };
+
   const handleCategoryClick = (category) => {
-    console.log("handeling category click");
+    console.log("Handling category click", category); // Add this log to check the selected category
+
     async function fetchFromCategory() {
       try {
         const response = await axios.get(
@@ -83,10 +109,12 @@ const Product = () => {
           }
         );
         setProducts(response.data.products);
+        setSelectedCategory(category ? category.title : "All");
       } catch (error) {
         console.error(error);
       }
     }
+
     fetchFromCategory();
   };
 
@@ -108,16 +136,20 @@ const Product = () => {
               Featured Products
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <aside className="bg-white p-4 rounded-lg shadow-md h-full flex flex-col">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[650px]">
+            <aside className="bg-white p-4 rounded-lg shadow-md flex flex-col h-fit">
               <h2 className="text-xl font-semibold mb-4">Categories</h2>
               <ul className="space-y-2">
-                <li>
+                {/* <li>
                   <button
                     onClick={() => handleCategoryClick()}
                     className={`block py-2 px-4 rounded text-dark 
-                           bg-red-400 text-white w-full"
-                      }`}
+                           bg-red-400 text-white w-full ${
+                             selectedCategory === "All"
+                               ? "bg-red-400 text-white"
+                               : "bg-red-100 hover:bg-red-200"
+                           }
+                      `}
                   >
                     All
                   </button>
@@ -127,8 +159,41 @@ const Product = () => {
                     <button
                       onClick={() => handleCategoryClick(category)}
                       className={`block py-2 px-4 rounded text-dark 
-                           bg-red-400 text-white w-full"
-                      }`}
+                           bg-red-400 text-white w-full ${
+                             category.title === selectedCategory
+                               ? "bg-red-400 text-white"
+                               : "bg-red-100 hover:bg-red-200"
+                           }`}
+                    >
+                      {category.title}
+                    </button>
+                  </li>
+                ))} */}
+                <li>
+                  <button
+                    onClick={() => handleCategoryClick()}
+                    className={`block py-2 px-4 rounded text-dark w-full
+           ${
+             selectedCategory === "All"
+               ? "bg-red-400 text-white"
+               : "bg-red-100 hover:bg-red-200"
+           }
+    `}
+                  >
+                    All
+                  </button>
+                </li>
+                {categories.map((category, index) => (
+                  <li key={index}>
+                    <button
+                      onClick={() => handleCategoryClick(category)}
+                      className={`block py-2 px-4 rounded text-dark w-full 
+           ${
+             selectedCategory === category.title
+               ? "bg-red-400 text-white"
+               : "bg-red-100 hover:bg-red-200"
+           }
+      `}
                     >
                       {category.title}
                     </button>
@@ -137,38 +202,44 @@ const Product = () => {
               </ul>
             </aside>
 
-            <section className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {currentProducts.map((product) => (
-                <div
-                  className="bg-white p-4 rounded-lg shadow-md h-72 flex flex-col"
-                  key={product.id}
-                >
-                  <img
-                    src={`http://localhost:5000/${product.image.replace(
-                      /\\/g,
-                      "/"
-                    )}`}
-                    alt="Product Image"
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                  <div className="p-1">
-                    <h3 className="text-lg font-bold mb-2">{product.title}</h3>
-                    <div className="flex space-x-2">
-                      <Link to={`/product/${product._id}`}>
-                        <button className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                          View Details
+            <section className="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {!currentProducts.length ? (
+                <div className="h-full w-full col-span-full bg-white rounded-md flex justify-center items-center text-xl font-semibold">
+                  No Products to show for this Category
+                </div>
+              ) : (
+                currentProducts.map((product) => (
+                  <div
+                    className="bg-white p-4 rounded-lg shadow-md h-72 flex flex-col"
+                    key={product.id}
+                  >
+                    <img
+                      src={`http://localhost:5000/${product.image.replace(
+                        /\\/g,
+                        "/"
+                      )}`}
+                      alt="Product Image"
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                    <div className="p-1">
+                      <h3 className="text-lg font-bold mb-2">{product.name}</h3>
+                      <div className="flex space-x-2">
+                        <Link to={`/product/${product._id}`}>
+                          <button className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            View Details
+                          </button>
+                        </Link>
+                        <button
+                          onClick={() => openModal(product.title)}
+                          className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        >
+                          Get Quote
                         </button>
-                      </Link>
-                      <button
-                        onClick={() => openModal(product.title)}
-                        className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      >
-                        Get Quote
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </section>
           </div>
 

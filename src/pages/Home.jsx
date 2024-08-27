@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Newsletter from "../components/Newsletter";
 import About from "../pages/About";
-import Product from "../pages/Product";
+import Product from "../pages/CheckProduct";
 import Contact from "../pages/Contact";
 import Banner from "../components/Banner";
 import { useLocation } from "react-router-dom";
@@ -13,12 +13,10 @@ const Home = () => {
   }, [pathname]);
   return (
     <>
-    
-   
       <Banner />
       <About />
       <Product />
-     
+
       <Contact />
       <Newsletter />
     </>
