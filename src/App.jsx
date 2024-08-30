@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Product from "./pages/Product";
-import ProductDetails from "./pages/ProductDetails";
+import ProductDetails from "./pages/productDetails";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import TopBar from "./components/TopBar";

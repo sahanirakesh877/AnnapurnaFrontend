@@ -17,7 +17,7 @@ const ProductDetails = () => {
     async function getSelectedProduct() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/products/${id}`
+          `${import.meta.env.VITE_SERVER}/api/v1/products/${id}`
         );
         console.log(response.data);
         if (response.data.success) {

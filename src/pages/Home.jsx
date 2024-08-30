@@ -5,6 +5,7 @@ import Product from "../pages/CheckProduct";
 import Contact from "../pages/Contact";
 import Banner from "../components/Banner";
 import { useLocation } from "react-router-dom";
+import FloatingIcons from "../components/floatingIcons";
 
 const Home = () => {
   const pathname = useLocation();
@@ -19,6 +20,7 @@ const Home = () => {
 
       <Contact />
       <Newsletter />
+      <FloatingIcons />
     </>
   );
 };

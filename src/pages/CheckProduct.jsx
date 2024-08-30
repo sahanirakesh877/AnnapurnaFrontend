@@ -41,7 +41,7 @@ const Product = () => {
         setProducts(productData);
         setLoading(false);
       } catch (err) {
-        setError("Failed to fetch data");
+        setError("Failed to fetch Product. Server Error");
         setLoading(false);
       }
     };
@@ -101,7 +101,7 @@ const Product = () => {
     async function fetchFromCategory() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/products",
+          `${import.meta.env.VITE_SERVER}/api/v1/products`,
           {
             params: {
               categoryId: category ? category._id : "",
@@ -125,7 +125,12 @@ const Product = () => {
   }, [pathname]);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error)
+    return (
+      <div className="min-h-96 w-full bg-slate-300 flex justify-center items-center font-semibold text-xl">
+        {error}
+      </div>
+    );
 
   return (
     <>
@@ -214,10 +219,9 @@ const Product = () => {
                     key={product.id}
                   >
                     <img
-                      src={`http://localhost:5000/${product.image.replace(
-                        /\\/g,
-                        "/"
-                      )}`}
+                      src={`${
+                        import.meta.env.VITE_SERVER
+                      }/${product.image.replace(/\\/g, "/")}`}
                       alt="Product Image"
                       className="w-full h-48 object-cover rounded-t-lg"
                     />
@@ -230,7 +234,7 @@ const Product = () => {
                           </button>
                         </Link>
                         <button
-                          onClick={() => openModal(product.title)}
+                          onClick={() => openModal(product.name)}
                           className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                         >
                           Get Quote
