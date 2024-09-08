@@ -91,15 +91,15 @@ const Product = () => {
               {!currentProducts ? (
                 <div>No Products</div>
               ) : (
-                currentProducts.map((a) => (
+                currentProducts.map((a, index) => (
                   <div
                     className="bg-white p-4 rounded-lg shadow-md h-72 flex flex-col"
-                    key={a.id}
+                    key={index}
                   >
                     <img
                       src={a.image1}
                       alt="Product Image"
-                      className="w-full h-48 object-cover rounded-t-lg"
+                      className="w-full h-48 object-contain rounded-t-lg"
                     />
                     <div className="p-1">
                       <h3 className="text-lg font-bold mb-2">{a.title}</h3>

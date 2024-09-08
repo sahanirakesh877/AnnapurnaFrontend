@@ -3,15 +3,15 @@ import axios from "axios";
 
 const Modal = ({ isOpen, onClose, title }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    country: '',
-    message: ''
+    name: "",
+    phone: "",
+    email: "",
+    country: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
+  const [serverResponse, setServerResponse] = useState(null);
 
   if (!isOpen) return null;
 
@@ -19,20 +19,43 @@ const Modal = ({ isOpen, onClose, title }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError(null);
+    setServerResponse(null);
+
+    formData.productName = title;
+    console.log(formData);
 
     try {
-      await axios.post('/api/submit-quote', formData);
-      onClose();
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER}/api/v1/products/quote`,
+        formData
+      );
+      setServerResponse(response.data);
+      if (response.data.success) {
+        setTimeout(() => {
+          setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            country: "",
+            message: "",
+          });
+          setServerResponse(null);
+          onClose();
+        }, 1000);
+      }
     } catch (err) {
-      setError('An error occurred while submitting the form. Please try again.');
+      console.log(err);
+      setError({
+        message:
+          "An error occurred while submitting the form. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -48,7 +71,9 @@ const Modal = ({ isOpen, onClose, title }) => {
         <form onSubmit={handleSubmit}>
           <div className="flex items-center justify-between space-x-2">
             <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -60,7 +85,9 @@ const Modal = ({ isOpen, onClose, title }) => {
               />
             </div>
             <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">Phone</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Phone
+              </label>
               <input
                 type="tel"
                 name="phone"
@@ -75,7 +102,9 @@ const Modal = ({ isOpen, onClose, title }) => {
 
           <div className="flex items-center justify-between space-x-2">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -88,7 +117,9 @@ const Modal = ({ isOpen, onClose, title }) => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Country</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Country
+              </label>
               <input
                 type="text"
                 name="country"
@@ -102,7 +133,9 @@ const Modal = ({ isOpen, onClose, title }) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Message</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Message
+            </label>
             <textarea
               name="message"
               value={formData.message}
@@ -114,7 +147,16 @@ const Modal = ({ isOpen, onClose, title }) => {
             ></textarea>
           </div>
 
-          {error && <p className="text-red-600 text-center mb-4">{error}</p>}
+          {serverResponse &&
+            (serverResponse.success ? (
+              <p className="text-green-600 text-center mb-4">
+                {serverResponse.message}
+              </p>
+            ) : (
+              <p className="text-red-600 text-center mb-4">
+                {serverResponse.message}
+              </p>
+            ))}
 
           <div className="flex justify-end">
             <button
@@ -127,9 +169,11 @@ const Modal = ({ isOpen, onClose, title }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`bg-blue-600 text-white px-3 py-1 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-blue-600 text-white px-3 py-1 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

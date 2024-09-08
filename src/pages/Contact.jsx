@@ -9,25 +9,37 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  const [submitting, setSubmitting] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    setSubmitting(true);
+
     try {
-      await axios.post("https://your-api-endpoint.com/submit", {
-        name,
-        email,
-        message,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER}/api/v1/contact`,
+        {
+          name,
+          email,
+          message,
+        }
+      );
 
-      // Clear the form fields
-      setName("");
-      setEmail("");
-      setMessage("");
+      console.log(response);
+      if (response.data.success) {
+        // Clear the form fields
+        setName("");
+        setEmail("");
+        setMessage("");
 
-      toast.success("Form submitted successfully!");
+        toast.success("Message Sent.");
+      }
     } catch (error) {
       toast.error("Failed to submit form.");
       console.error("Error:", error);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -70,7 +82,7 @@ const Contact = () => {
                       value={name}
                     />
                     <label
-                      className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-dark peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                      className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-dark -translate-y-[0.9rem] scale-[0.8] motion-reduce:transition-none "
                       htmlFor="exampleInput90"
                     >
                       Name
@@ -86,7 +98,7 @@ const Contact = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                     <label
-                      className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-dark peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                      className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-dark -translate-y-[0.9rem] scale-[0.8] motion-reduce:transition-none "
                       htmlFor="exampleInput91"
                     >
                       Email address
@@ -97,14 +109,13 @@ const Contact = () => {
                       className="peer block min-h-[auto] w-full rounded border-2 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none "
                       id="exampleFormControlTextarea1"
                       rows={3}
-                      defaultValue={""}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                     />
 
                     <label
                       htmlFor="exampleFormControlTextarea1"
-                      className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-Red peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                      className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-Red -translate-y-[0.9rem] scale-[0.8] motion-reduce:transition-none "
                     >
                       Message
                     </label>
@@ -112,9 +123,12 @@ const Contact = () => {
 
                   <button
                     type="submit"
-                    className="mb-6 w-full rounded bg-red-700 text-white px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal   lg:mb-0"
+                    className={`mb-6 w-full rounded bg-red-700 text-white px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal lg:mb-0 ${
+                      submitting && "opacity-60 cursor-not-allowed"
+                    }`}
+                    disabled={submitting}
                   >
-                    Send
+                    {submitting ? "Sending" : "Send"}
                   </button>
                 </form>
               </div>
@@ -144,10 +158,10 @@ const Contact = () => {
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold ">Technical support</p>
                         <p className="text-sm text-neutral-500">
-                          example@gmail.com
+                          info@annapurnamediequip.com
                         </p>
                         <p className="text-sm text-neutral-500">
-                          1-600-890-4567
+                          +977 985-1188872
                         </p>
                       </div>
                     </div>
@@ -175,13 +189,13 @@ const Contact = () => {
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold ">Address</p>
                         <p className="text-sm text-neutral-500">
-                          abcd, <br />
-                          xyz <br />
+                          Dhobighat, <br />
+                          Lalitpur <br />
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:mb-0 md:w-6/12 md:px-3 lg:mb-12 lg:w-full lg:px-6 xl:w-6/12">
+                  {/* <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:mb-0 md:w-6/12 md:px-3 lg:mb-12 lg:w-full lg:px-6 xl:w-6/12">
                     <div className="align-start flex">
                       <div className="shrink-0">
                         <div className="inline-block rounded-md bg-red-600  p-4 text-white">
@@ -211,7 +225,7 @@ const Contact = () => {
                         <p className="text-neutral-500"> (0421) 431 2030</p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:w-full lg:px-6 xl:mb-12 xl:w-6/12">
                     <div className="align-start flex">
@@ -235,7 +249,7 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold ">Mobile</p>
-                        <p className="text-neutral-500"> +91 123456789</p>
+                        <p className="text-neutral-500">+977 985-1188872</p>
                       </div>
                     </div>
                   </div>

@@ -13,6 +13,8 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [productLoading, setProductLoading] = useState(false);
+
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const productsPerPage = 4;
@@ -97,6 +99,8 @@ const Product = () => {
 
   const handleCategoryClick = (category) => {
     console.log("Handling category click", category); // Add this log to check the selected category
+    setSelectedCategory(category ? category.title : "All");
+    setProductLoading(true);
 
     async function fetchFromCategory() {
       try {
@@ -109,9 +113,10 @@ const Product = () => {
           }
         );
         setProducts(response.data.products);
-        setSelectedCategory(category ? category.title : "All");
       } catch (error) {
         console.error(error);
+      } finally {
+        setProductLoading(false);
       }
     }
 
@@ -207,44 +212,52 @@ const Product = () => {
               </ul>
             </aside>
 
-            <section className="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {!currentProducts.length ? (
-                <div className="h-full w-full col-span-full bg-white rounded-md flex justify-center items-center text-xl font-semibold">
-                  No Products to show for this Category
-                </div>
-              ) : (
-                currentProducts.map((product) => (
-                  <div
-                    className="bg-white p-4 rounded-lg shadow-md h-72 flex flex-col"
-                    key={product.id}
-                  >
-                    <img
-                      src={`${
-                        import.meta.env.VITE_SERVER
-                      }/${product.image.replace(/\\/g, "/")}`}
-                      alt="Product Image"
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
-                    <div className="p-1">
-                      <h3 className="text-lg font-bold mb-2">{product.name}</h3>
-                      <div className="flex space-x-2">
-                        <Link to={`/product/${product._id}`}>
-                          <button className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                            View Details
+            {productLoading ? (
+              <div className="md:col-span-2 flex justify-center items-center font-semibold text-xl">
+                Please Wait...
+              </div>
+            ) : (
+              <section className="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {!currentProducts.length ? (
+                  <div className="h-full w-full col-span-full bg-white rounded-md flex justify-center items-center text-xl font-semibold">
+                    No Products to show for this Category
+                  </div>
+                ) : (
+                  currentProducts.map((product, index) => (
+                    <div
+                      className="bg-white h-fit p-4 rounded-lg shadow-md flex flex-col"
+                      key={index}
+                    >
+                      <img
+                        src={`${
+                          import.meta.env.VITE_SERVER
+                        }/${product.image.replace(/\\/g, "/")}`}
+                        alt="Product Image"
+                        className="w-full h-48 object-contain rounded-t-lg"
+                      />
+                      <div className="p-1">
+                        <h3 className="text-lg font-bold mb-2">
+                          {product.name}
+                        </h3>
+                        <div className="flex space-x-2">
+                          <Link to={`/product/${product._id}`}>
+                            <button className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                              View Details
+                            </button>
+                          </Link>
+                          <button
+                            onClick={() => openModal(product.name)}
+                            className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                          >
+                            Get Quote
                           </button>
-                        </Link>
-                        <button
-                          onClick={() => openModal(product.name)}
-                          className="bg-green-200 text-sm text-dark px-2 py-1 rounded-lg shadow hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                        >
-                          Get Quote
-                        </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
-              )}
-            </section>
+                  ))
+                )}
+              </section>
+            )}
           </div>
 
           {/* Pagination Controls */}

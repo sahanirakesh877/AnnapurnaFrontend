@@ -19,7 +19,7 @@ function TopBar() {
               href="mailto:your-email@example.com"
               className="hover:text-white text-sm text-white"
             >
-              your-email@example.com
+              info@annapurnamediequip.com
             </a>
           </div>
           <div className="flex items-center space-x-2">
@@ -28,7 +28,7 @@ function TopBar() {
               href="tel:+1234567890"
               className="hover:text-indigo-500 text-sm text-white"
             >
-              +123 456 7890
+              +977 985-1188872
             </a>
           </div>
         </div>

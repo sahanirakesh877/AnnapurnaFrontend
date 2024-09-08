@@ -41,43 +41,6 @@ export default function ProductDetails() {
   return (
     <>
       {selectedProduct && !loading && (
-        // <div>
-        //   <div>
-        //     <div>
-        //       <img
-        //         src={`${
-        //           import.meta.env.VITE_SERVER
-        //         }/${selectedProduct.image.replace(/\\/g, "/")}`}
-        //         alt=""
-        //       />
-        //     </div>
-        //     <h2>{selectedProduct.name}</h2>
-        //     <div>Brand: {selectedProduct.brand}</div>
-        //     <div>
-        //       Category:{" "}
-        //       {selectedProduct.category && selectedProduct.category.title
-        //         ? selectedProduct.category.title
-        //         : "please specify category again"}
-        //     </div>
-        //     <div>Price: Rs{selectedProduct.price}</div>
-        //     <div>
-        //       Description: <SafeHtml htmlString={selectedProduct.desc} />
-        //     </div>
-        //     <div>Added At: {selectedProduct.createdAt}</div>
-        //   </div>
-        //   <Link
-        //     to={`/product/${id}/edit`}
-        //     className="px-2 py-1 bg-blue-500 text-white rounded mr-2 hover:bg-blue-600 transition duration-300"
-        //   >
-        //     Edit
-        //   </Link>
-        //   <button
-        //     className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300"
-        //     onClick={handleDelete}
-        //   >
-        //     Delete
-        //   </button>
-        // </div>
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
             {selectedProduct === "not found" ? (
@@ -167,7 +130,7 @@ export default function ProductDetails() {
                 </div>
                 <img
                   alt="ecommerce"
-                  className="lg:w-1/2 w-full h-[500px] object-cover object-center rounded"
+                  className="lg:w-1/2 w-full h-[500px] object-contain object-center rounded"
                   src={`${
                     import.meta.env.VITE_SERVER
                   }/${selectedProduct.image.replace(/\\/g, "/")}`}
