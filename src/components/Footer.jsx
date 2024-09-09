@@ -48,11 +48,14 @@ const Footer = () => {
                 Contact us
               </div>
               <a className="my-3 block" href="/#">
-                XXX XXXX, Floor 4 San Francisco, CA
+                Dhobighat, Lalitpur
                 <span className="text-teal-600 text-xs p-1" />
               </a>
-              <a className="my-3 block" href="/#">
-                contact@company.com
+              <a
+                className="my-3 block"
+                href="mailto://info@annapurnamediequip.com"
+              >
+                info@annapurnamediequip.com
                 <span className="text-teal-600 text-xs p-1" />
               </a>
             </div>

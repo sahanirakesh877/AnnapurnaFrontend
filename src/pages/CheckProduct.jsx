@@ -129,7 +129,12 @@ const Product = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="w-full h-[70vh] flex justify-center items-center text-3xl font-semibold">
+        Please Wait...
+      </div>
+    );
   if (error)
     return (
       <div className="min-h-96 w-full bg-slate-300 flex justify-center items-center font-semibold text-xl">

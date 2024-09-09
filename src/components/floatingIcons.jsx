@@ -14,7 +14,7 @@ export default function FloatingIcons() {
           className="text-[#6a829c] bg-slate-50 p-1 rounded-md my-1 border border-red"
         />
       </a>
-      <a href="	https://wa.me/9704501240" target="_blank">
+      <a href="	https://wa.me/9851188872" target="_blank">
         <IoLogoWhatsapp
           size={50}
           className="text-[#25D366] bg-slate-50 p-1 rounded-md my-1 border border-red"

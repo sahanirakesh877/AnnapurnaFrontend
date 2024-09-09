@@ -67,7 +67,7 @@ const Product = () => {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <aside className="bg-white p-4 rounded-lg shadow-md h-full flex flex-col h-fit">
+            <aside className="bg-white p-4 rounded-lg shadow-md flex flex-col h-fit">
               <h2 className="text-xl font-semibold mb-4">Categories</h2>
               <ul className="space-y-2">
                 {categories.map((category, index) => (

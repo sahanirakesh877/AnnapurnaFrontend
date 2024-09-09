@@ -33,14 +33,23 @@ export default function ProductDetails() {
         setLoading(false);
       }
     }
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+
     getSelectedProduct();
+    scrollToTop();
   }, [id]);
 
   console.log(selectedProduct);
 
   return (
     <>
-      {selectedProduct && !loading && (
+      {selectedProduct && !loading ? (
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
             {selectedProduct === "not found" ? (
@@ -139,6 +148,10 @@ export default function ProductDetails() {
             )}
           </div>
         </section>
+      ) : (
+        <div className="w-full h-[70vh] flex justify-center items-center text-3xl font-semibold">
+          Please Wait...
+        </div>
       )}
     </>
   );
