@@ -237,7 +237,7 @@ const Product = () => {
                         src={`${
                           import.meta.env.VITE_SERVER
                         }/${product.image.replace(/\\/g, "/")}`}
-                        alt="Product Image"
+                        alt={product.name}
                         className="w-full h-48 object-contain rounded-t-lg"
                       />
                       <div className="p-1">
