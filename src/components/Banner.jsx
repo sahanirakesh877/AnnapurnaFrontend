@@ -1,5 +1,7 @@
 import Slider from "react-slick";
 import { images } from "../assets/heroData";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   var settings = {
@@ -17,15 +19,40 @@ const Banner = () => {
     arrows: false,
   };
 
+  useEffect(() => {
+    async function getBannerProducts() {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER}/api/v1/products`,
+          {
+            params: {
+              banner: true,
+            },
+          }
+        );
+        setProducts(response.data.products);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }, []);
+
   return (
     <Slider {...settings}>
       {images.map((items, index) => {
         return (
           <div className="imageContainer" key={index}>
             <img src={items.image} alt={items.title} className="heroImg" />
+            <div></div>
             <div className="imageText">
               <h1 className="textImage">{items.title}</h1>
-              <div className="subItems">
+              <Link
+                to="/product"
+                className="bg-red-600 mt-4 px-4 py-2 w-[200px] flex justify-center items-center rounded-lg text-white font-semibold shadow-lg shadow-red-950 border border-violet-400 bannerButton"
+              >
+                View Products
+              </Link>
+              {/* <div className="subItems">
                 {items.subItems &&
                   items.subItems.map((item, index) => {
                     return (
@@ -35,7 +62,7 @@ const Banner = () => {
                       </div>
                     );
                   })}
-              </div>
+              </div> */}
             </div>
           </div>
         );
