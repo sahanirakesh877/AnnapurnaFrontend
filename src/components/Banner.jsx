@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   var settings = {
     infinite: true,
-    speed: 2000,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
@@ -43,12 +43,12 @@ const Banner = () => {
         return (
           <div className="imageContainer" key={index}>
             <img src={items.image} alt={items.title} className="heroImg" />
-            <div></div>
+
             <div className="imageText">
               <h1 className="textImage">{items.title}</h1>
               <Link
                 to="/product"
-                className="bg-red-600 mt-4 px-4 py-2 w-[200px] flex justify-center items-center rounded-lg text-white font-semibold shadow-lg shadow-red-950 border border-violet-400 bannerButton"
+                className="bg-red-600 mt-4 px-4 py-2 w-[200px] flex justify-center items-center rounded-full  text-white font-semibold shadow-sm shadow-red-950 border border-violet-100 bannerButton hover:bg-white hover:text-red-600"
               >
                 View Products
               </Link>
