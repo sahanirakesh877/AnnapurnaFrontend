@@ -79,6 +79,9 @@ body {
   text-align: center;
   line-height: 1.2; 
   background: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1)); 
+  text-shadow: 300px 300px 100px -25px black;
+  backdrop-filter: blur(5px);
+
 }
 
 
