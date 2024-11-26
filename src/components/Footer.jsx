@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import logoImg from "/Annapurnal1.png";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
           <div className="container  px-4 sm:px-6 text-gray-800 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto pt-4">
             <div className="py-5">
               <img
-                src="/Annapurnal1.png"
+                src={logoImg}
                 className="h-20 w-auto object-contain"
                 alt="Logo"
               />
@@ -27,6 +28,9 @@ const Footer = () => {
               </Link>
               <Link className="my-3 block" to="/contact">
                 Contact <span className="text-teal-600 text-xs p-1">New</span>
+              </Link>
+              <Link className="my-3 block" to="/events">
+                Events <span className="text-teal-600 text-xs p-1">New</span>
               </Link>
             </div>
             <div className="p-5">

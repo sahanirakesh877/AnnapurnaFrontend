@@ -11,6 +11,7 @@ import "yet-another-react-lightbox/styles.css"; // Import Lightbox styles
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Gallery = () => {
   const { pathname } = useLocation();
