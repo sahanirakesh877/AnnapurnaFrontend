@@ -11,6 +11,8 @@ import PageNotFound from "./pages/PageNotFound";
 import TopBar from "./components/TopBar";
 import Gallery from "./pages/Gallery";
 import CheckProduct from "./pages/CheckProduct";
+import Events from "./pages/events";
+import EventDetails from "./pages/eventDetails";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/check" element={<CheckProduct />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:eventId" element={<EventDetails />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />

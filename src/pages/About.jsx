@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import aboutImg from "/about.jpg";
 
 const About = () => {
   const { pathname } = useLocation();
@@ -10,11 +11,11 @@ const About = () => {
   return (
     <>
       <section className="container mx-auto py-10 ">
-       <div className="flex justify-center items-center pb-8">
-       <h2 className=" border-b-2 border-green-400 uppercase text-center text-3xl text-red-700 font-semibold">
-         About Us
-        </h2>
-       </div>
+        <div className="flex justify-center items-center pb-8">
+          <h2 className=" border-b-2 border-green-400 uppercase text-center text-3xl text-red-700 font-semibold">
+            About Us
+          </h2>
+        </div>
         <div className="sm:flex items-center">
           <div className="sm:w-1/2 p-5">
             <div className="text">
@@ -52,7 +53,7 @@ const About = () => {
           </div>
           <div className="sm:w-1/2 ">
             <div className="image object-center text-center">
-              <img src="/about.jpg " alt="About Us Image" />
+              <img src={aboutImg} alt="About Us Image" />
             </div>
           </div>
         </div>

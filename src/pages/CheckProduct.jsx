@@ -266,8 +266,8 @@ const Product = () => {
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex justify-center flex-row mt-12 items-center">
-            <ReactPaginate
+          <div className="flex justify-center flex-row mt-12 items-center select-none">
+            {/* <ReactPaginate
               previousLabel={"< Previous "}
               nextLabel={"Next >"}
               breakLabel={"..."}
@@ -276,9 +276,9 @@ const Product = () => {
               pageRangeDisplayed={5}
               onPageChange={handlePageClick}
               containerClassName={"flex space-x-1"}
-              pageClassName={"bg-white border border-gray-300 rounded"}
+              pageClassName={"bg-white rounded m-0 "}
               pageLinkClassName={
-                "hover:text-white hover:bg-blue-700 px-3 pb-2 text-blue-500"
+                "hover:text-white transition-all duration-200 hover:bg-blue-400 px-3 pb-2 text-blue-500 flex justify-center items-center rounded-sm"
               }
               previousClassName={"bg-red-400 text-white px-3 py-1 rounded"}
               previousLinkClassName={"text-white"}
@@ -288,6 +288,42 @@ const Product = () => {
               breakLinkClassName={"text-blue-600"}
               activeClassName={"bg-blue-600"}
               activeLinkClassName={"text-red-600"}
+            /> */}
+            <ReactPaginate
+              previousLabel={"< Previous "}
+              nextLabel={"Next >"}
+              breakLabel={"..."}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={
+                "flex justify-center items-center space-x-2 p-3"
+              }
+              pageClassName={
+                "flex items-center justify-center bg-white rounded-full w-8 h-8"
+              }
+              pageLinkClassName={
+                "text-[#9A0000] hover:text-white hover:bg-[#9A0000] transition-all duration-200 px-4 py-2 rounded-full"
+              }
+              previousClassName={
+                "flex items-center justify-center bg-[#9A0000] text-white px-3 py-2 rounded-full"
+              }
+              previousLinkClassName={
+                "text-white hover:bg-[#B70000] transition-all duration-200"
+              }
+              nextClassName={
+                "flex items-center justify-center bg-[#9A0000] text-white px-3 py-2 rounded-full transition-colors duration-300 ease-in-out"
+              }
+              nextLinkClassName={
+                "text-white hover:bg-[#B70000] hover:text-[#FFF] transition-colors duration-300 ease-in-out"
+              }
+              breakClassName={
+                "flex items-center justify-center bg-white border border-gray-300 text-gray-500 rounded-full w-8 h-8"
+              }
+              breakLinkClassName={"text-[#9A0000]"}
+              activeClassName={"bg-[#9A0000] text-white"}
+              activeLinkClassName={"font-semibold"}
             />
           </div>
         </div>

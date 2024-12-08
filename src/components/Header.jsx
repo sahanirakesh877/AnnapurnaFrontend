@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logoImg from "/Annapurnal1.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const Header = () => {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="/Annapurnal1.png"
+            src={logoImg}
             className="h-20 w-auto object-contain"
             alt="Logo"
           />
@@ -89,6 +90,15 @@ const Header = () => {
                 onClick={closeMenu} // Close menu when clicked
               >
                 Gallery
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/events"
+                className="block py-2 px-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 dark:text-dark md:dark:hover:text-red-500 dark:hover:bg-gray-700 dark:hover:text-dark md:dark:hover:bg-transparent"
+                onClick={closeMenu} // Close menu when clicked
+              >
+                Events
               </Link>
             </li>
             <li>
